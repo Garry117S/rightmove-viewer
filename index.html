@@ -2,63 +2,39 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <title>Rightmove Properties</title>
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Rightmove Results Viewer</title>
   <style>
-    body {
-      font-family: Arial, sans-serif;
-      padding: 2rem;
-      background: #f9f9f9;
-    }
-    h1 {
-      text-align: center;
-    }
-    .property {
-      border: 1px solid #ccc;
-      background: #fff;
-      border-radius: 8px;
-      padding: 1rem;
-      margin: 1rem 0;
-      box-shadow: 0 2px 5px rgba(0,0,0,0.05);
-    }
-    .property hr {
-      margin: 0.5rem 0;
-    }
-    .property p {
-      margin: 0.3rem 0;
-    }
+    body { font-family: Arial, sans-serif; margin: 2em; }
+    .property { border-bottom: 1px solid #ccc; padding: 1em 0; }
+    .timestamp { font-size: 0.9em; color: gray; }
   </style>
 </head>
 <body>
-  <h1>Latest Properties</h1>
-  <div id="properties">Loading...</div>
+  <h1>Rightmove Scrape Results</h1>
+  <div id="results">Loading...</div>
 
   <script>
-    fetch('data/results.json')
-      .then(response => response.json())
+    fetch('archive.json')
+      .then(res => res.json())
       .then(data => {
-        const container = document.getElementById('properties');
+        const sorted = data.sort((a, b) => b.timestamp.localeCompare(a.timestamp));
+        const container = document.getElementById('results');
         container.innerHTML = '';
-
-        Object.values(data).forEach(prop => {
-          const div = document.createElement('div');
-          div.className = 'property';
-          div.innerHTML = `
-            <p><strong>Address:</strong> ${prop.address}</p>
-            <p><strong>Price:</strong> ${prop.price}</p>
-            <p><strong>Type:</strong> ${prop.type}</p>
-            <p><strong>Beds:</strong> ${prop.beds}</p>
-            <p><strong>Baths:</strong> ${prop.baths}</p>
-            <p><strong>Images:</strong> ${prop.images}</p>
-            <p><strong>Description:</strong> ${prop.description}</p>
-            <hr>
+        sorted.forEach(prop => {
+          container.innerHTML += `
+            <div class="property">
+              <div class="timestamp">Scraped: ${prop.timestamp}</div>
+              <strong>${prop.address}</strong><br>
+              <em>${prop.type}</em><br>
+              Price: ${prop.price} | Beds: ${prop.beds} | Baths: ${prop.baths} | Images: ${prop.images}<br>
+              <p>${prop.description}</p>
+            </div>
           `;
-          container.appendChild(div);
         });
       })
-      .catch(error => {
-        document.getElementById('properties').textContent = 'Failed to load data.';
-        console.error(error);
+      .catch(err => {
+        document.getElementById('results').innerText = 'Error loading data.';
+        console.error(err);
       });
   </script>
 </body>
