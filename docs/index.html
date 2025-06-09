@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Rightmove Results Viewer</title>
+  <style>
+    body { font-family: Arial, sans-serif; margin: 2em; }
+    .property { border-bottom: 1px solid #ccc; padding: 1em 0; }
+    .timestamp { font-size: 0.9em; color: gray; }
+  </style>
+</head>
+<body>
+  <h1>Rightmove Scrape Results</h1>
+  <div id="results">Loading...</div>
+
+  <script>
+    fetch('archive.json')
+      .then(res => res.json())
+      .then(data => {
+        const sorted = data.sort((a, b) => b.timestamp.localeCompare(a.timestamp));
+        const container = document.getElementById('results');
+        container.innerHTML = '';
+        sorted.forEach(prop => {
+          container.innerHTML += `
+            <div class="property">
+              <div class="timestamp">Scraped: ${prop.timestamp}</div>
+              <strong>${prop.address}</strong><br>
+              <em>${prop.type}</em><br>
+              Price: ${prop.price} | Beds: ${prop.beds} | Baths: ${prop.baths} | Images: ${prop.images}<br>
+              <p>${prop.description}</p>
+            </div>
+          `;
+        });
+      })
+      .catch(err => {
+        document.getElementById('results').innerText = 'Error loading data.';
+        console.error(err);
+      });
+  </script>
+</body>
+</html>
