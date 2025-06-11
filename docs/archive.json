@@ -1,32 +1,22 @@
 [
   {
-    "address": "St. Georges Terrace, Jesmond, NE2",
-    "price": "£295,000",
-    "type": "Flat",
-    "beds": "2",
-    "baths": "2",
-    "images": "21",
-    "description": "This beautifully presented two bedroom, first floor apartment is ideally situated on St Georges Terrace.",
-    "timestamp": "2025-06-10 18:35 UTC"
-  },
-  {
-    "address": "Eslington Terrace, Jesmond, Newcastle upon Tyne",
-    "price": "£240,000",
-    "type": "Flat",
-    "beds": "2",
+    "address": "Springbank Road, Sandyford, Newcastle Upon Tyne, NE2",
+    "price": "£145,000",
+    "type": "Apartment",
+    "beds": "1",
     "baths": "1",
-    "images": "10",
-    "description": "PERIOD FEATURES & NO ONWARD CHAIN! This two bedroom conversion apartment is ideally located on Eslington Terrace, right in the heart of Brandling Village Conservation Area, Jesmond! Eslington Terrace, situated close to the parade of shops on Clayton Road, Jesmond Metro Station as well as Exhibiti...",
-    "timestamp": "2025-06-10 18:35 UTC"
+    "images": "7",
+    "description": "Dating from circa 1901 and originally constructed as The Vicarage for the former St Barnabas Church, this fine period property was converted into apartments early in the millennium. The location is notable, close to Sandyford’s cafes and restaurants, within walking distance of the green spa...",
+    "timestamp": "2025-06-11-00-12"
   },
   {
-    "address": "Osborne Road, Newcastle Upon Tyne, NE2",
-    "price": "£220,000",
-    "type": "Flat",
-    "beds": "2",
-    "baths": "2",
-    "images": "13",
-    "description": "Situated in the heart of Jesmond, this two-bedroom top-floor apartment offers a blend of modern living within a converted building comprising six individual flats. The property is ideal for first-time buyers, investors, or professionals seeking a vibrant urban lifestyle.",
-    "timestamp": "2025-06-10 18:35 UTC"
+    "address": "Springbank Road, Sandyford, Newcastle Upon Tyne, NE2",
+    "price": "£145,000",
+    "type": "Apartment",
+    "beds": "1",
+    "baths": "1",
+    "images": "7",
+    "description": "Dating from circa 1901 and originally constructed as The Vicarage for the former St Barnabas Church, this fine period property was converted into apartments early in the millennium. The location is notable, close to Sandyford’s cafes and restaurants, within walking distance of the green spa...",
+    "timestamp": "2025-06-11 00:12 UTC"
   }
 ]
