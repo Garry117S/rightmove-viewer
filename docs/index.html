@@ -4,9 +4,13 @@
   <meta charset="UTF-8" />
   <title>Rightmove Results Viewer</title>
   <style>
-    body { font-family: Arial, sans-serif; margin: 2em; }
-    .property { border-bottom: 1px solid #ccc; padding: 1em 0; }
-    .timestamp { font-size: 0.9em; color: gray; }
+    body { font-family: Arial, sans-serif; margin: 2em; background: #f9f9f9; color: #333; }
+    h1 { margin-bottom: 1em; }
+    .property { background: #fff; border: 1px solid #ccc; border-radius: 5px; padding: 1em; margin-bottom: 1em; box-shadow: 0 2px 5px rgba(0,0,0,0.1); }
+    .timestamp { font-size: 0.85em; color: gray; margin-bottom: 0.5em; }
+    strong { font-size: 1.1em; }
+    em { color: #555; }
+    p { margin-top: 0.5em; }
   </style>
 </head>
 <body>
@@ -14,13 +18,24 @@
   <div id="results">Loading...</div>
 
   <script>
-    fetch('archive.json')
-      .then(res => res.json())
+    fetch('latest.json')
+      .then(res => {
+        if (!res.ok) throw new Error('Network response was not ok');
+        return res.json();
+      })
       .then(data => {
-        const sorted = data.sort((a, b) => b.timestamp.localeCompare(a.timestamp));
         const container = document.getElementById('results');
         container.innerHTML = '';
-        sorted.forEach(prop => {
+
+        // Convert object to array and sort by timestamp descending
+        const propsArray = Object.values(data).sort((a, b) => b.timestamp.localeCompare(a.timestamp));
+
+        if (propsArray.length === 0) {
+          container.innerText = 'No properties found.';
+          return;
+        }
+
+        propsArray.forEach(prop => {
           container.innerHTML += `
             <div class="property">
               <div class="timestamp">Scraped: ${prop.timestamp}</div>
@@ -33,8 +48,9 @@
         });
       })
       .catch(err => {
-        document.getElementById('results').innerText = 'Error loading data.';
-        console.error(err);
+        const container = document.getElementById('results');
+        container.innerText = 'Error loading data.';
+        console.error('Fetch error:', err);
       });
   </script>
 </body>
