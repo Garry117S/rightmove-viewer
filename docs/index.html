@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <title>Rightmove Results Viewer</title>
+  <title>Rightmove Seen Properties Viewer</title>
   <style>
     body { font-family: Arial, sans-serif; margin: 2em; background: #f9f9f9; color: #333; }
     h1 { margin-bottom: 1em; }
@@ -14,11 +14,11 @@
   </style>
 </head>
 <body>
-  <h1>Rightmove Scrape Results</h1>
+  <h1>Seen Rightmove Properties</h1>
   <div id="results">Loading...</div>
 
   <script>
-    fetch('latest.json')
+    fetch('seen.json')
       .then(res => {
         if (!res.ok) throw new Error('Network response was not ok');
         return res.json();
@@ -27,7 +27,6 @@
         const container = document.getElementById('results');
         container.innerHTML = '';
 
-        // Convert object to array and sort by timestamp descending
         const propsArray = Object.values(data).sort((a, b) => b.timestamp.localeCompare(a.timestamp));
 
         if (propsArray.length === 0) {
