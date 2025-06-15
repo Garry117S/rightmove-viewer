@@ -38,7 +38,9 @@
           container.innerHTML += `
             <div class="property">
               <div class="timestamp">Scraped: ${prop.timestamp}</div>
-              <strong>${prop.address}</strong><br>
+              <a href="${prop.link}" target="_blank" rel="noopener noreferrer">
+                <strong>${prop.address}</strong>
+              </a><br>
               <em>${prop.type}</em><br>
               Price: ${prop.price} | Beds: ${prop.beds} | Baths: ${prop.baths} | Images: ${prop.images}<br>
               <p>${prop.description}</p>
